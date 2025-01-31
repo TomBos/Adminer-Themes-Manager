@@ -1,24 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <title>CSS Injector</title>
-        <style>
-            body {
-                font-family: Arial, sans-serif;
-                padding: 10px;
-            }
-            button {
-                padding: 10px 20px;
-                font-size: 16px;
-                cursor: pointer;
-            }
-        </style>
-    </head>
-    <body>
-        <h1>CSS Injector</h1>
-        <p>Click the button to inject CSS into the current page.</p>
-        <button id="inject-css">Inject CSS</button>
-
-        <script src="./background.js"></script>
-    </body>
+<head>
+    <title>Adminer Themes</title>
+    <style>
+        body { font-family: Arial, sans-serif; width: 200px; padding: 10px; }
+        select { width: 100%; padding: 5px; margin-bottom: 10px; }
+        button { width: 100%; padding: 5px; }
+    </style>
+</head>
+<body>
+<h3>Select Theme:</h3>
+<select id="theme-selector">
+    <option value="dracula.minified.css">Dracula</option>
+    <option value="hydra.minified.css">Hydra</option>
+</select>
+<button id="apply-theme">Apply</button>
+<script src="./popup.js"></script>
+</body>
 </html>
