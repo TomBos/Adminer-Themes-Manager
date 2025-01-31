@@ -3,12 +3,19 @@
   "name": "Adminer Themes Manager",
   "version": "1.0",
   "description": "A simple extension to select Adminer themes without installing CSS on the server.",
-  "permissions": ["scripting", "storage"],
-  "host_permissions": ["https://demo.adminer.org/*"],
-  "web_accessible_resources": [{
-    "resources": ["themes/*.minified.css"],
-    "matches": ["https://demo.adminer.org/*"]
-  }],
+  "permissions": [
+    "scripting",
+    "storage"
+  ],
+  "host_permissions": [
+    "https://demo.adminer.org/*"
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["themes/*.minified.css"],
+      "matches": ["https://demo.adminer.org/*"]
+    }
+  ],
   "action": {
     "default_popup": "popup.html"
   },

@@ -1,30 +1,19 @@
-(function () {
-    window.addEventListener('DOMContentLoaded', function () {
-        chrome.storage.sync.get("selectedTheme", function (data) {
-            const themeFile = data.selectedTheme;
+document.addEventListener("DOMContentLoaded", function () {
+    // Load saved theme from storage
+    document.body.style.animation = "none";
+    chrome.storage.sync.get("selectedTheme", function (data) {
+        const themeFile = data.selectedTheme || "default-theme.minified.css"; // Default theme if no selection is saved
 
-            chrome.tabs.query({active: true, currentWindow: true}, function (tabs) {
-                if (tabs.length === 0) return;
+        fetch(chrome.runtime.getURL("themes/" + themeFile))
+            .then(response => response.text())
+            .then(css => {
+                // Create a <style> element and inject the CSS directly into the document's head
+                const style = document.createElement("style");
+                style.textContent = css;
+                document.head.appendChild(style);
 
-                chrome.scripting.executeScript({
-                    target: {tabId: tabs[0].id},
-                    func: applyThemeOnLoad,
-                    args: [themeFile]
-                });
+                // Now that the CSS is applied, you can allow content to be visible
+                document.documentElement.style.visibility = 'visible';
             });
-        });
     });
-})();
-
-function applyThemeOnLoad(themeFile) {
-        const existingLink = document.getElementById("adminer-theme");
-        if (existingLink) {
-            existingLink.href = chrome.runtime.getURL("themes/" + themeFile);
-        } else {
-            const link = document.createElement("link");
-            link.id = "adminer-theme";
-            link.rel = "stylesheet";
-            link.href = chrome.runtime.getURL("themes/" + themeFile);
-            document.head.appendChild(link);
-        }
-}
+});
